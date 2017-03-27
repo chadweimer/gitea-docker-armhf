@@ -35,10 +35,10 @@ RUN apk update && \
   echo "git:$(date +%s | sha256sum | base64 | head -c 32)" | chpasswd
 
 RUN wget -O gitea_src.tar.gz https://github.com/go-gitea/gitea/archive/v$GITEA_VERSION.tar.gz && \
-    tar -C gitea_src -xzf gitea_src.tar.gz && \
+    tar -xzf gitea_src.tar.gz && \
     rm gitea_src.tar.gz && \
-    cp -r gitea_src/docker / && \
-    rm gitea_src && \
+    cp --verbose -r gitea-$GITEA_VERSION/docker/. / && \
+    rm -rf gitea-$GITEA_VERSION && \
     mkdir -p /app/gitea && \
     wget -O /app/gitea/gitea https://github.com/go-gitea/gitea/releases/download/v$GITEA_VERSION/gitea-$GITEA_VERSION-linux-arm-7 && \
     chmod +x /app/gitea/gitea
