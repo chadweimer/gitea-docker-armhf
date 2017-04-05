@@ -1,4 +1,4 @@
-FROM armhf/alpine:3.5
+FROM hypriot/rpi-alpine:3.5
 
 ENV USER git
 ENV GITEA_CUSTOM /data/gitea
