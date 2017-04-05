@@ -13,8 +13,11 @@ script:
   # test image
   #- docker run cwmr/gitea:armhf ???
   # push image
-  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-  #- TAG=$(grep "ENV MYSQL_VERSION" Dockerfile | awk 'NF>1{print $NF}')
-  #- docker tag cwmr/gitea:armhf cwmr/gitea:$TAG
-  #- docker push cwmr/gitea:$TAG
-  - docker push cwmr/gitea:armhf
+  - >
+    if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+      docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+      TAG=$(grep "ENV GITEA_VERSION" Dockerfile | awk 'NF>1{print $NF}')
+      docker tag cwmr/gitea:armhf cwmr/gitea:$TAG-armhf
+      docker push cwmr/gitea:$TAG-armhf
+      docker push cwmr/gitea:armhf
+    fi
