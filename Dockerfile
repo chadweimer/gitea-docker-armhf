@@ -26,7 +26,7 @@ RUN addgroup \
     git && \
   echo "git:$(date +%s | sha256sum | base64 | head -c 32)" | chpasswd
 
-ENV GITEA_VERSION 1.1.3
+ENV GITEA_VERSION 1.1.4
 ENV USER git
 ENV GITEA_CUSTOM /data/gitea
 ENV GODEBUG=netdns=go
