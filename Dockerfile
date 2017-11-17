@@ -1,4 +1,4 @@
-FROM multiarch/alpine:armhf-v3.5
+FROM multiarch/alpine:armhf-v3.6
 
 EXPOSE 22 3000
 
@@ -26,7 +26,7 @@ RUN addgroup \
     git && \
   echo "git:$(date +%s | sha256sum | base64 | head -c 32)" | chpasswd
 
-ENV GITEA_VERSION 1.1.4
+ENV GITEA_VERSION 1.2.3
 ENV USER git
 ENV GITEA_CUSTOM /data/gitea
 ENV GODEBUG=netdns=go
