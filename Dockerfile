@@ -1,4 +1,4 @@
-FROM multiarch/alpine:armhf-v3.6
+FROM alpine:3.7
 
 EXPOSE 22 3000
 
@@ -12,6 +12,7 @@ RUN apk --no-cache add \
     s6 \
     curl \
     openssh \
+    gettext \
     tzdata \
     wget
 RUN addgroup \
@@ -24,9 +25,9 @@ RUN addgroup \
     -u 1000 \
     -G git \
     git && \
-  echo "git:$(date +%s | sha256sum | base64 | head -c 32)" | chpasswd
+  echo "git:$(dd if=/dev/urandom bs=24 count=1 status=none | base64)" | chpasswd
 
-ENV GITEA_VERSION 1.2.3
+ENV GITEA_VERSION 1.3.2
 ENV USER git
 ENV GITEA_CUSTOM /data/gitea
 ENV GODEBUG=netdns=go
