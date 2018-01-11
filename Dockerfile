@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM multiarch/alpine:armhf-v3.7
 
 EXPOSE 22 3000
 
